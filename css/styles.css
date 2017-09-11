@@ -44,12 +44,9 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0; }
-
-/* Prevents iPhone from resizing in landscape mode  */
 html {
   -webkit-text-size-adjust: none; }
 
-/*  apply a natural box layout model to all elements  */
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -65,24 +62,29 @@ body {
 
 div#wrapper {
   height: 100vh;
-  border-radius: 1.5rem;
   overflow: hidden;
   position: relative;
   background: #19B5FE }
 
-/* HEADER  */
 header {
   background-color: #317589;
-  padding: .5rem 0 .5rem 2%; }
+  padding: 0.5rem 1rem }
 
 header h1, header h2 {
-  color: white; }
+  text-align: center;
+  color: white;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%)
+ }
 
 header h1 {
+  top: 1rem;
   font-size: 1.5rem;
   font-weight: 700; }
 
 header h2 {
+  top: 2.5rem;
   font-size: .75rem;
   font-weight: 400;
   padding-top: .2rem; }
@@ -111,8 +113,6 @@ nav {
     padding: 5px 10px;
     margin-left: 4%; }
 
-/*end nav*/
-/* MAIN  */
 main {
   min-height: 5em;}
     main #location {
@@ -159,8 +159,20 @@ main {
     flex-grow: 1; }
   main #right div span:nth-child(4) {
     flex-grow: 1; }
-
-/*  FOOTER  */
+input, button{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  padding: 0.2rem 1rem;
+  border: none;
+  outline: none;
+  background-color: #19B5FE;
+  color: #fff
+}
+input{background-color: #82D9FF }
+::-webkit-input-placeholder {
+  color: #fff
+}
 footer {
   position: fixed;
   bottom: 0;
@@ -171,9 +183,15 @@ footer {
   color: #fff;
   font-size: .9rem; }
 
-/* OTHER */
 div.keepOpen {
   clear: both; }
+
+
+@media only screen and (max-width: 960px){
+  header{
+    padding-top: 4rem;
+  }
+}
 
 @media only screen and (min-width: 480px) {
   #left, #right {
@@ -182,6 +200,7 @@ div.keepOpen {
 @media only screen and (min-width: 800px) {
   div#wrapper {
     max-width: 800px;
+    border-radius: 1.5rem;
     margin: 3rem auto 0 auto;
     border: 1px solid #666;
     height: auto;
@@ -189,6 +208,5 @@ div.keepOpen {
 
   footer {
     clear: both;
-    position: relative; } }
+    position: relative; } } 
 
-/*# sourceMappingURL=styles.css.map */

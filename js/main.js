@@ -1,31 +1,41 @@
 /*jslint browser:true */
 'use strict';
 
-(function() {
-    var conditionsURL = "http://api.wunderground.com/api/745b2952d8b72680/conditions/q/84653.json" 
+
     var conditions = new XMLHttpRequest();
-    conditions.responseType = 'text';
-    conditions.open('GET',conditionsURL, true);
-    conditions.send();
+    var forecast = new XMLHttpRequest();
+    var condObj, foreObj;
+    var weather = function() {
+
+        var zipCode = document.getElementById('zip').value;
+        if (zipCode === "") {
+            zipCode = "Egypt/Cairo";
+        }
+        
+        var conditionsURL = "http://api.wunderground.com/api/745b2952d8b72680/geolookup/conditions/q/"+zipCode+".json"; 
+        
+        conditions.open('GET', conditionsURL, true);
+        conditions.responseType = 'text';
+        conditions.send();
+
+        var forecastURL = "http://api.wunderground.com/api/745b2952d8b72680/geolookup/forecast/q/" + zipCode + ".json";
+    
+        forecast.open('GET', forecastURL, true);
+        forecast.responseType = 'text';
+        forecast.send();
+    }
     conditions.onload = function() {
         if (conditions.status === 200) {
-            var condObj = JSON.parse(conditions.responseText);
-            console.log(condObj);
+            condObj = JSON.parse(conditions.responseText);
             document.getElementById('location').innerHTML = condObj.current_observation.display_location.full;
             document.getElementById('weather').innerHTML = condObj.current_observation.weather;
             document.getElementById('temperature').innerHTML = condObj.current_observation.temp_c;
-
         }
     }
-    var forecastURL = "http://api.wunderground.com/api/745b2952d8b72680/forecast/q/84653.json"
-    var forecast = new XMLHttpRequest();
-    forecast.responseType = 'text';
-    forecast.open('GET', forecastURL, true);
-    forecast.send();
+    
     forecast.onload = function () {
         if (forecast.status === 200) {
-            var foreObj = JSON.parse(forecast.responseText);
-            console.log(foreObj);
+            foreObj = JSON.parse(forecast.responseText);
             document.getElementById('desc').innerHTML = foreObj.forecast.txt_forecast.forecastday["0"].fcttext;
 
 
@@ -46,8 +56,9 @@
 
         }
     }
+    weather();
     
-}())
+
 
 
 
